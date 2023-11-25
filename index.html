@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="stylesheet" href="style.css">             <!--use to connect html to cs-->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -40,30 +40,26 @@
 </div>
 
 <script>
-    const apikey = "214b08022e190771b2bbe876d72ee582";         //it's use for when user enter city name then wheather information is updated
+    const apikey = "214b08022e190771b2bbe876d72ee582";
     const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
     const searchBox = document.querySelector(".search input");
-    const searchBtn = document.querySelector(".search button");   //jb user search btn ko click karega tb city name ki informationcheckweather ko jayegi
+    const searchBtn = document.querySelector(".search button");
     const WeatherIcon = document.querySelector(".Weather-icon");
 
     async function checkWeather(city){
-        const response = await fetch(apiUrl + city +  `&appid=${apikey}`);    //fatch apiUrl and then fatch city name from apiUrl and response it
-        if(response.status == 404){
-            document.querySelector(".error").style.display = "block";
+        const response = await fetch(apiUrl + city +  `&appid=${apikey}`);
             document.querySelector(".Weather").style.display = "none";
         }else{
             var data = await response.json();
 
-        document.querySelector(".city").innerHTML = data.name;                                      //update city name
-        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";             //update temperature  [math.round is round the temperature in integer]
-        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";                 //update humidity
-        document.querySelector(".wind").innerHTML = data.wind.speed + "Km/h";                    //update windspeed  [data.wind.speed means to update wind speed data]
-        
+        document.querySelector(".city").innerHTML = data.name;
+        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+        document.querySelector(".wind").innerHTML = data.wind.speed + "Km/h";
         //update the image according to the weather condition
-        if(data.weather[0].main == "Clouds"){                  // if weather condition cloud h to cloud image ko add kre
-            WeatherIcon.src = "images/clouds.png";             // where, weather icon is a class of rain image
-        }
+        if(data.weather[0].main == "Clouds"){
+            WeatherIcon.src = "images/clouds.png";
         else if(data.weather[0].main == "Clear"){
             WeatherIcon.src = "images/clear.png";
         }
@@ -77,13 +73,13 @@
             WeatherIcon.src = "images/mist.png";
         }
 
-        document.querySelector(".Weather").style.display = "block";           //when user enter the city name then display the weather information otherwise not display or display is block
-        document.querySelector(".error").style.display = "none";           // if user give wrong input as a city name then display error massage
+        document.querySelector(".Weather").style.display = "block";
+        document.querySelector(".error").style.display = "none";
 
         }
     }
     searchBtn.addEventListener("click", ()=>{
-        checkWeather(searchBox.value);                //jb hm checkweather function ko call karege to searchbox se city name ki value ko return karega
+        checkWeather(searchBox.value);
     })
   
 </script>
