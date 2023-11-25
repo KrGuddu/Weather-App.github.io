@@ -49,6 +49,8 @@
 
     async function checkWeather(city){
         const response = await fetch(apiUrl + city +  `&appid=${apikey}`);
+        if(response.status == 404){
+            document.querySelector(".error").style.display = "block";
             document.querySelector(".Weather").style.display = "none";
         }else{
             var data = await response.json();
@@ -57,6 +59,7 @@
         document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
         document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
         document.querySelector(".wind").innerHTML = data.wind.speed + "Km/h";
+        
         //update the image according to the weather condition
         if(data.weather[0].main == "Clouds"){
             WeatherIcon.src = "clouds.png";
@@ -75,7 +78,6 @@
 
         document.querySelector(".Weather").style.display = "block";
         document.querySelector(".error").style.display = "none";
-
         }
     }
     searchBtn.addEventListener("click", ()=>{
