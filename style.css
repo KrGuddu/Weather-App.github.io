@@ -5,7 +5,6 @@
     box-sizing: border-box;
 }
 body{
-    /* background: #c307c657; */
     background: linear-gradient(800deg, #0e624c, #584f99);
 }
 .card{
@@ -90,5 +89,5 @@ body{
     margin-left: 10px;
     font-size: 14px;
     margin-top: 10px;
-    display: none;    /*when user give right input then not display error but give wrong input then display error massege */
+    display: none;
 }
